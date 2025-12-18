@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>show matrix</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+        <script src="https://unpkg.com/vue@3.5.0/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="field">
+            <p v-html="message" v-bind:class="p_class" v-on:click="onClick"></p>
+            <table class="table">
+                <thead v-if="matrix.length > 0">
+                    <tr>
+                        <th>ID</th>
+                        <th v-for="(value, key) in matrix[0]" :key="key" v-if="key !== 'id'">
+                            {{ key }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(record,rowIndex) in matrix" :key="record.id ?? rowIndex">
+                        <td>{{record.id ?? rowIndex}}</td>
+                        <td v-for="(data,key) in record" :key="key" v-if="key !== 'id'">{{key}}:{{data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            const appdata ={
+                data() {
+                    return {
+                        message : Date(),
+                        p_class : "default",
+                        matrix : [
+                            { name: 'Yasushi', mail: 'osonoi@cu', tel: '1111' },
+                            { name: 'Koh', mail: 'kojima@cu', tel: '2222' },
+                            { name: 'Alice', mail: 'alice@example.com', tel: '3333' },
+                            { name: 'Bob', mail: 'bob@example.com', tel: '4444' },
+                            { name: 'Charlie', mail: 'charlie@example.com', tel: '5555' },
+                            { name: 'David', mail: 'david@example.com', tel: '6666' },
+                            { name: 'Eve', mail: 'eve@example.com', tel: '7777' },
+                            { name: 'Frank', mail: 'frank@example.com', tel: '8888' },
+                            { name: 'Grace', mail: 'grace@example.com', tel: '9999' },
+                            { name: 'Henry', mail: 'henry@example.com', tel: '0000' }]
+                    }
+                },
+                mounted() {
+                    setInterval(() => {
+                        this.message = Date();
+                    }, 1000)
+                },
+                methods: {
+                    onClick : function(){
+                        if(this.p_class == "default"){
+                            this.p_class = "red";
+                        }else{
+                            this.p_class = "default";
+                        }
+                    }
+                }
+            }
+            Vue.createApp(appdata).mount('#field');
+        </script>
+
+        <style>
+            .default{
+                color: black;
+                border: solid 1px black;
+            }
+            .red{
+                color: red;
+                border: solid 1px black;
+            }
+        </style>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3.5.0/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="field">
+            <p v-html="message"></p>
+        </div>
+
+        <script>
+            const appdata ={
+                data() {
+                    return {
+                        message : Date()
+                    }
+                },
+                mounted() {
+                    setInterval(() => {
+                        this.message = Date();
+                    }, 1000)
+                }
+            }
+            Vue.createApp(appdata).mount('#field');
+        </script>
+    </body>
+</html>
